@@ -1,5 +1,3 @@
-#if 0
-
 #include "Convolution.h"
 #include "Eltwise.h"
 #include "Concat.h"
@@ -55,25 +53,25 @@ public:
 			int shape[4];
 		float* x_ = conv1->Run(x);
 			conv1->GetOutputShape(shape);
-			SaveToFile("../models/my_testmodel/output/conv1.output.dat", (char*)x_, shape[0] * shape[1] * shape[2] * shape[3] * sizeof(float));
+			SaveToFile("../outputs/my_testmodel/conv1.output.dat", (char*)x_, shape[0] * shape[1] * shape[2] * shape[3] * sizeof(float));
 		x = conv2->Run(x_, true);
 			conv2->GetOutputShape(shape);
-			SaveToFile("../models/my_testmodel/output/conv2.output.dat", (char*)x, shape[0] * shape[1] * shape[2] * shape[3] * sizeof(float));
+			SaveToFile("../outputs/my_testmodel/conv2.output.dat", (char*)x, shape[0] * shape[1] * shape[2] * shape[3] * sizeof(float));
 		x = elt->Run(x_, x);
 			elt->GetOutputShape(shape);
-			SaveToFile("../models/my_testmodel/output/elt.output.dat", (char*)x, shape[0] * shape[1] * shape[2] * shape[3] * sizeof(float));
+			SaveToFile("../outputs/my_testmodel/elt.output.dat", (char*)x, shape[0] * shape[1] * shape[2] * shape[3] * sizeof(float));
 		x_ = conv3->Run(x, true);
 			conv3->GetOutputShape(shape);
-			SaveToFile("../models/my_testmodel/output/conv3.output.dat", (char*)x_, shape[0] * shape[1] * shape[2] * shape[3] * sizeof(float));
+			SaveToFile("../outputs/my_testmodel/conv3.output.dat", (char*)x_, shape[0] * shape[1] * shape[2] * shape[3] * sizeof(float));
 		x = cat->Run(x, x_);	// clear all inputs
 			cat->GetOutputShape(shape);
-			SaveToFile("../models/my_testmodel/output/cat.output.dat", (char*)x, shape[0] * shape[1] * shape[2] * shape[3] * sizeof(float));
+			SaveToFile("../outputs/my_testmodel/cat.output.dat", (char*)x, shape[0] * shape[1] * shape[2] * shape[3] * sizeof(float));
 		x = pool->Run(x);
 			pool ->GetOutputShape(shape);
-			SaveToFile("../models/my_testmodel/output/pool.output.dat", (char*)x, shape[0] * shape[1] * shape[2] * shape[3] * sizeof(float));
+			SaveToFile("../outputs/my_testmodel/pool.output.dat", (char*)x, shape[0] * shape[1] * shape[2] * shape[3] * sizeof(float));
 		x = fc1->Run(x);
 			fc1->GetOutputShape(shape);
-			SaveToFile("../models/my_testmodel/output/fc1.output.dat", (char*)x, shape[0] * shape[1] * sizeof(float));
+			SaveToFile("../outputs/my_testmodel/fc1.output.dat", (char*)x, shape[0] * shape[1] * sizeof(float));
 		x = fc2->Run(x);
 		return x;
 	}
@@ -95,12 +93,10 @@ void test_mymodel() {
 	model.GetOutputShape(out_shape);
 	// size = out_shape[0] * out_shape[1] * out_shape[2] * out_shape[3];
 	size = out_shape[0] * out_shape[1];
-	SaveToFile("../models/my_testmodel/output/output.dat", (char*)output, size * sizeof(float));
+	SaveToFile("../outputs/my_testmodel/output.dat", (char*)output, size * sizeof(float));
 }
 
 int main() {
 	test_mymodel();
 	return 0;
 }
-
-#endif

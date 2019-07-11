@@ -2,6 +2,7 @@
 #define _FULLY_CONNECTION_H
 
 #include <iostream>
+#include <cstring>
 
 class FullyConnection{
 private:

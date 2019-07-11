@@ -2,6 +2,7 @@
 #define _POOLING_H
 
 #include <string>
+#include <cstring>
 
 using namespace std;
 

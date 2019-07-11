@@ -1,4 +1,5 @@
 #include "Concat.h"
+#include <cstring>
 #include <cstdarg>
 #include <iostream>
 
@@ -84,7 +85,9 @@ int Concat::SetKeepOrNot(bool keep, ...) {
 	va_start(ap, keep);
 	for (int i = 0; i < in_shape.size(); i++) {
 		keep_in.push_back(keep);
-		va_arg(ap, bool);
+		// ‘bool’ is promoted to ‘int’ when passed through ‘...’
+		// so you should pass ‘int’ not ‘bool’ to ‘va_arg’
+		keep = va_arg(ap, int);
 	}
 	va_end(ap);
 
